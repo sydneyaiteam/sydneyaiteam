@@ -52,6 +52,25 @@ var bot = new builder.UniversalBot(connector, function (session) {
 	pyshell.on('message', function (message) {
 	    // received a message sent from the Python script (a simple "print" statement)
 	   console.log(message);
+	   var mammoth = require("mammoth");
+ 
+		mammoth.convertToHtml({path: "generated_document.docx"})
+    	.then(function(result){
+        	var html = result.value; // The generated HTML
+        	var messages = result.messages; // Any messages, such as warnings during conversion
+        	console.log(html);
+
+        	var fs = require('fs');
+fs.writeFile("test.html", result.value, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+        	})
+    	.done();
+
 	});
 
 	// end the input stream and allow the process to exit
