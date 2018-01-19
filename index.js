@@ -23,8 +23,6 @@ var connector = new builder.ChatConnector({
 
 server.post('/api/messages', connector.listen());
 
-/*var connector = new builder.ConsoleConnector().listen();*/
-
 
 var bot = new builder.UniversalBot(connector, function (session) {
     var msg = session.message;
@@ -61,28 +59,25 @@ var bot = new builder.UniversalBot(connector, function (session) {
         	console.log(html);
 
         	var fs = require('fs');
-fs.writeFile("test.html", result.value, function(err) {
-    if(err) {
-        return console.log(err);
-    }
+			fs.writeFile("test.html", result.value, function(err) {
+			    if(err) {
+			        return console.log(err);
+			    }
 
-    console.log("The file was saved!");
-}); 
-        	})
-    	.done();
+			    console.log("The file was saved!");
+				}); 
+			})
+			.done();
+			});
 
-	});
+        	pyshell.end(function (err) {
+    	    if (err){
+    	    	console.log(err.message)
+    	        throw err;
+    	    };
 
-	// end the input stream and allow the process to exit
-	pyshell.end(function (err) {
-	    if (err){
-	    	console.log(err.message)
-	        throw err;
-	    };
-
-	    console.log('finished');
-	});
-
+    	    console.log('finished');
+	   });
 
     } else {
         // Echo back users text
@@ -92,8 +87,6 @@ fs.writeFile("test.html", result.value, function(err) {
 
 
 //var bot = new builder.UniversalBot(connector, { persistConversationData: true });
-
-
 
 // var bot = new builder.UniversalBot(connector, function (session) {
 //     var msg = session.message;
